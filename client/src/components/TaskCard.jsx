@@ -16,7 +16,6 @@ const convertDate = (deadline) => {
 };
 
 const TaskCard = ({ title, description, deadline, createdAt }) => {
-  console.log(deadline);
   const FormattedDeadline = convertDate(deadline);
   const FormattedCreatedAt = convertDate(createdAt);
 

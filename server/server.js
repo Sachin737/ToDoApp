@@ -22,7 +22,7 @@ const PORT = process.env.PORT || 9000;
 
 // middlewares
 app.use((req, res, next) => {
-  console.log(req.path, req.method);
+  // console.log(req.path, req.method);
   next();
 });
 

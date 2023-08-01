@@ -1,12 +1,15 @@
 import axios from "axios";
 import React from "react";
+import { useContext } from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { tasksContext } from "../context/tasksContext";
 
 const TaskForm = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [deadline, setDeadline] = useState("");
+  const [tasks, setTasks] = useContext(tasksContext);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -30,6 +33,7 @@ const TaskForm = () => {
         }
       );
       if (data.success) {
+        setTasks([data.task,...tasks]);
         toast.success("Task added successfully!");
       }
     } catch (err) {

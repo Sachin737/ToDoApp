@@ -10,7 +10,7 @@ const getAllTasksController = async (req, res) => {
       tasks,
     });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(400).send({
       success: false,
       error: err.message,
@@ -37,7 +37,7 @@ const getSingleTaskController = async (req, res) => {
       });
     }
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(400).send({
       success: false,
       error: err.message,
@@ -88,7 +88,7 @@ const deleteTaskController = async (req, res) => {
       });
     }
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(400).send({
       success: false,
       error: err.message,
@@ -118,7 +118,7 @@ const updateTaskController = async (req, res) => {
       });
     }
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(400).send({
       success: false,
       error: err.message,

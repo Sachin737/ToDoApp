@@ -1,27 +1,12 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useContext } from "react";
 
 import TaskCard from "../components/TaskCard.jsx";
 import TaskForm from "../components/TaskForm.jsx";
-
+import { tasksContext } from "../context/tasksContext.js";
 
 const Home = () => {
-  const [tasks, setTasks] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(
-          `${process.env.REACT_APP_API}/api/tasks`
-        );        
-        setTasks(data?.tasks);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const [tasks] = useContext(tasksContext);
 
   return (
     <div className="home">
