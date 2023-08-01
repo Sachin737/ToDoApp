@@ -12,13 +12,7 @@ const Home = () => {
     <div className="home">
       <div className="tasks">
         {tasks?.map((task) => (
-          <TaskCard
-            key={task._id}
-            title={task.title}
-            description={task.description}
-            deadline={task.dueDate}
-            createdAt={task.createdAt}
-          />
+          <TaskCard key={task._id} task={task} />
         ))}
       </div>
       <TaskForm></TaskForm>

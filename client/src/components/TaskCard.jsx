@@ -1,4 +1,10 @@
 import React from "react";
+import { Trash } from "@phosphor-icons/react";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { useContext } from "react";
+import { tasksContext } from "../context/tasksContext";
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 //  convert date according to user location
 const convertDate = (deadline) => {
@@ -15,12 +21,33 @@ const convertDate = (deadline) => {
   return formattedDate;
 };
 
-const TaskCard = ({ title, description, deadline, createdAt }) => {
+const TaskCard = ({ task }) => {
+  const { _id, title, description, deadline, createdAt } = task;
   const FormattedDeadline = convertDate(deadline);
-  const FormattedCreatedAt = convertDate(createdAt);
+  const [tasks, setTasks] = useContext(tasksContext);
+
+  const deleteHandler = async () => {
+    try {
+      const { data } = await axios.delete(
+        `${process.env.REACT_APP_API}/api/tasks/${_id}`
+      );
+
+      if (data.success) {
+        const updatedTasks = tasks.filter((t) => t._id !== _id);
+        setTasks(updatedTasks);
+        toast.success("Task deleted successfully!");
+      }
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
 
   return (
     <div className="task-details">
+      <button onClick={deleteHandler}>
+        <Trash color="#e40035" weight="fill" size={28} />
+      </button>
+
       <h4>{title}</h4>
       <p className="deadline">
         <strong>deadline: </strong> {FormattedDeadline}
@@ -32,11 +59,10 @@ const TaskCard = ({ title, description, deadline, createdAt }) => {
 
       <div className="description-box">{description}</div>
 
-      <p className="createdAt">
-        <strong>createdAt: </strong> {FormattedCreatedAt}
-      </p>
+      <div className="createdAt">
+        <p>{formatDistanceToNow(new Date(createdAt), { addSuffix: true })}</p>
+      </div>
     </div>
   );
 };
-
 export default TaskCard;

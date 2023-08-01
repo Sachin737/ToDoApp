@@ -8,7 +8,7 @@ import { tasksContext } from "../context/tasksContext";
 const TaskForm = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [deadline, setDeadline] = useState("");
+  const [deadlinestr, setDeadlinestr] = useState("");
   const [tasks, setTasks] = useContext(tasksContext);
 
   const submitHandler = async (e) => {
@@ -19,8 +19,8 @@ const TaskForm = () => {
         throw new Error("Please add task title!");
       }
 
-      const dueDate = new Date(deadline);
-      const task = { title, description, dueDate };
+      const deadline = new Date(deadlinestr);
+      const task = { title, description, deadline };
       const headers = {
         "Content-Type": "application/json",
       };
@@ -33,7 +33,7 @@ const TaskForm = () => {
         }
       );
       if (data.success) {
-        setTasks([data.task,...tasks]);
+        setTasks([data.task, ...tasks]);
         toast.success("Task added successfully!");
       }
     } catch (err) {
@@ -61,8 +61,8 @@ const TaskForm = () => {
       <label>Deadline:</label>
       <input
         type="datetime-local"
-        onChange={(e) => setDeadline(e.target.value)}
-        value={deadline}
+        onChange={(e) => setDeadlinestr(e.target.value)}
+        value={deadlinestr}
       />
 
       <button>Add task</button>

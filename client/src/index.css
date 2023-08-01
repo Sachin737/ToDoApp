@@ -46,6 +46,7 @@ header a {
 }
 
 .task-details {
+  position: relative;
   background: #fff;
   border-radius: 4px;
   margin: 20px auto;
@@ -53,11 +54,6 @@ header a {
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
 }
 
-.task-details .description-box {
-  background-color: #f2f2f2;
-  padding: 10px 8px;
-  margin: 4px 0px;
-}
 
 .task-details h4 {
   margin: 0 0 10px 0;
@@ -77,22 +73,32 @@ header a {
   color: #555;
 }
 
+.task-details .description-box {
+  background-color: #f2f2f2;
+  padding: 10px 8px;
+  min-height: 20px;
+  max-height: 200px;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
 .task-details .createdAt {
-  margin: 0;
+  display: flex;
+  justify-content: flex-end;
   font-size: 0.9em;
+  margin-bottom: -20px;
   color: #555;
 }
 
 
-.task-details span {
+.task-details button {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 12px;
+  right: 12px;
   cursor: pointer;
-  background: #f1f1f1;
-  padding: 6px;
-  border-radius: 50%;
-  color: #333;
+  border: none;
+  background-color: #fff;
 }
 
 /* new workout form */

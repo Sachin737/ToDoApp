@@ -47,12 +47,12 @@ const getSingleTaskController = async (req, res) => {
 
 // create new task
 const createTaskController = async (req, res) => {
-  const { title, description, dueDate } = req.body;
+  const { title, description, deadline } = req.body;
   try {
     const task = await taskModel.create({
       title,
       description,
-      dueDate,
+      deadline,
     });
 
     res.status(200).send({
