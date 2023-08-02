@@ -5,8 +5,8 @@ import dotenv from "dotenv";
 import cors from "cors";
 
 import connectDB from "./db.js";
-import taskRoutes from "./routes/tasks.js";
-
+import tasksRoute from "./routes/tasksRoute.js";
+import userRoute from "./routes/userRoute.js";
 
 // App
 const app = express();
@@ -20,16 +20,12 @@ dotenv.config();
 //  PORT
 const PORT = process.env.PORT || 9000;
 
-// middlewares
-app.use((req, res, next) => {
-  // console.log(req.path, req.method);
-  next();
-});
-
+// conver request data in JSON
 app.use(express.json());
 
 // routes
-app.use("/api/tasks", taskRoutes);
+app.use("/api/tasks", tasksRoute);
+app.use("/api/user", userRoute);
 
 // database connection
 connectDB();

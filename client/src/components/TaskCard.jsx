@@ -23,7 +23,12 @@ const convertDate = (deadline) => {
 
 const TaskCard = ({ task }) => {
   const { _id, title, description, deadline, createdAt } = task;
-  const FormattedDeadline = convertDate(deadline);
+  let FormattedDeadline = convertDate(deadline);
+
+  if (FormattedDeadline?.substr(10, 4) === "1970") {
+    FormattedDeadline = "none";
+  }
+
   const [tasks, setTasks] = useContext(tasksContext);
 
   const deleteHandler = async () => {
