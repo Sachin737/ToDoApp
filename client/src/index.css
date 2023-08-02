@@ -3,32 +3,69 @@
 
 /* layout */
 :root {
+  --bg: #ffffff;
+  --bgshade: rgb(243, 243, 243);
   --primary: #1aac83;
   --primaryshade: #179773;
-  --error: #e7195a;
+  --logo: #333;
+  --fontlight: #555;
+  --shadow: rgba(0, 0, 0, 0.05);
+  --calender: light;
+}
+
+[data-theme='dark'] {
+  --bg: #212121;
+  --bgshade: rgb(0, 0, 0);
+  --primary: #1aac83;
+  --primaryshade: #179773;
+  --logo: rgb(255, 255, 255);
+  --fontlight: rgb(210, 210, 210);
+  --shadow: rgba(255, 255, 255, 0.105);
+  --calender: dark;
 }
 
 body {
-  background: #f1f1f1;
+  height: 100vh;
+  overflow-x: hidden;
+  padding: 0;
   margin: 0;
+  box-sizing: border-box;
+}
+
+
+.App {
+  min-height: 100vh;
+  background: var(--bgshade);
   font-family: "Poppins";
 }
 
 header {
-  background: #fff;
+  width: 100vw;
+  background: var(--bg);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
 }
 
 header .container {
-  max-width: 1400px;
-  margin: 0 auto;
+  margin: 0;
   padding: 10px 20px;
+}
+
+header .theme-toggle {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  gap: 16px;
+}
+
+header .theme-toggle h4 {
+  color: var(--fontlight);
 }
 
 header a {
-  color: #333;
+  color: var(--logo);
   text-decoration: none;
 }
 
@@ -47,11 +84,11 @@ header a {
 
 .task-details {
   position: relative;
-  background: #fff;
+  background: var(--bg);
   border-radius: 4px;
   margin: 20px auto;
   padding: 20px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+  box-shadow: 5px 5px 5px var(--shadow);
 }
 
 
@@ -64,23 +101,25 @@ header a {
 .task-details .deadline {
   margin: 0;
   font-size: 0.9em;
-  color: #555;
+  color: var(--fontlight);
 }
 
 .task-details .description {
   margin: 0;
   font-size: 0.9em;
-  color: #555;
+  color: var(--fontlight);
 }
 
 .task-details .description-box {
-  background-color: #f2f2f2;
+  color: var(--fontlight);
+  background-color: var(--bgshade);
   padding: 10px 8px;
   min-height: 20px;
   max-height: 200px;
   max-width: 100%;
   overflow-x: auto;
   overflow-y: auto;
+  margin-top: 4px;
 }
 
 .task-details .createdAt {
@@ -88,7 +127,7 @@ header a {
   justify-content: flex-end;
   font-size: 0.9em;
   margin-bottom: -20px;
-  color: #555;
+  color: var(--fontlight);
 }
 
 
@@ -98,7 +137,7 @@ header a {
   right: 12px;
   cursor: pointer;
   border: none;
-  background-color: #fff;
+  background-color: var(--bg);
 }
 
 /* new workout form */
@@ -107,12 +146,19 @@ input {
   display: block;
 }
 
+label {
+  color: var(--fontlight);
+}
+
 input {
+  background: var(--bgshade);
+  color: var(--fontlight);
+  color-scheme: var(--calender);
   padding: 10px;
   margin-top: 10px;
   margin-bottom: 20px;
   width: 100%;
-  border: 1px solid #ddd;
+  border: 1px solid var(--fontlight);
   border-radius: 4px;
   box-sizing: border-box;
 }
@@ -120,7 +166,7 @@ input {
 form button {
   background: var(--primary);
   border: 0;
-  color: #fff;
+  color: var(--bg);
   padding: 10px 12px;
   font-family: "Poppins";
   border-radius: 4px;
@@ -131,15 +177,54 @@ form button:hover {
   background: var(--primaryshade);
 }
 
-div.error {
-  padding: 10px;
-  background: #ffefef;
-  border: 1px solid var(--error);
-  color: var(--error);
-  border-radius: 4px;
-  margin: 20px 0;
+form h3 {
+  color: var(--fontlight);
 }
 
-input.error {
-  border: 1px solid var(--error);
+
+
+
+/* ========================================== */
+/* SCROLLBAR STYLING  */
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #80e38f;
+  border-radius: 9px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(89, 234, 111);
+}
+
+
+@media only screen and (max-width: 1200px) {
+  body {
+    overflow-x: hidden;
+  }
+  .home {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 50px;
+  }
+
+  .create {
+    width: 300px;
+  }
+
+  .tasks {
+    width: 90%;
+  }
+
 }
