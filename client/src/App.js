@@ -28,7 +28,7 @@ function App() {
             />
             <Route
               path="/register"
-              element={!user ? <Login /> : <Navigate to={"/"} />}
+              element={!user ? <Register /> : <Navigate to={"/"} />}
             />
           </Routes>
         </div>
