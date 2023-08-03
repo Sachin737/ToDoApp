@@ -4,7 +4,8 @@ import mongoose from "mongoose";
 // get all tasks
 const getAllTasksController = async (req, res) => {
   try {
-    const tasks = await taskModel.find({}).sort({ createdAt: -1 });
+    const user_id = req.user._id;
+    const tasks = await taskModel.find({user_id}).sort({ createdAt: -1 });
     res.status(200).send({
       success: true,
       tasks,
@@ -49,10 +50,13 @@ const getSingleTaskController = async (req, res) => {
 const createTaskController = async (req, res) => {
   const { title, description, deadline } = req.body;
   try {
+    const user_id = req.user._id;
+
     const task = await taskModel.create({
       title,
       description,
       deadline,
+      user_id,
     });
 
     res.status(200).send({

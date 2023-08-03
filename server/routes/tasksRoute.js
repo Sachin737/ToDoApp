@@ -1,4 +1,5 @@
 import express from "express";
+import requireAuth from "../middleware/authMiddleware.js";
 import {
   createTaskController,
   deleteTaskController,
@@ -8,6 +9,9 @@ import {
 } from "../controllers/taskController.js";
 
 const router = express.Router();
+
+// Token verification
+router.use(requireAuth);
 
 //  ALL TASKS ROUTE
 router.get("/", getAllTasksController);

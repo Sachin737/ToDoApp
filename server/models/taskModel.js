@@ -13,6 +13,10 @@ const taskSchema = new mongoose.Schema(
       type: Object,
       default: new Date("2100-01-01T12:00"),
     },
+    user_id: {
+      type: mongoose.ObjectId,
+      ref: "user",
+    },
   },
   { timestamps: true }
 );

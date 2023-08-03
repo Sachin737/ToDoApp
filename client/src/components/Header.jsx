@@ -3,10 +3,23 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { themeContext } from "../context/themeContext";
 import Switch from "react-switch";
+import { authContext } from "../context/authContext.js";
+import { tasksContext } from "../context/tasksContext";
 
 const Header = () => {
   const [theme, setTheme] = useContext(themeContext);
   const [checked, setChecked] = useState(theme === "dark");
+  const [user, setUser] = useContext(authContext);
+  const [tasks, setTasks] = useContext(tasksContext);
+
+  const logout = () => {
+    // remove user from global context
+    setUser(null);
+    // remove user from local storage
+    localStorage.removeItem("user");
+
+    setTasks(null);
+  };
 
   const switchTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
@@ -25,12 +38,28 @@ const Header = () => {
       </div>
       <div className="right">
         <div className="links">
-          <h3>
-            <Link to={"/login"}>login</Link>
-          </h3>
-          <h3>
-            <Link to={"register"}>register</Link>
-          </h3>
+          {user ? (
+            <>
+              {user.name.length <= 20 ? (
+                <p className="username">{user.name}</p>
+              ) : (
+                <p className="username">{user.name.substr(0, 20)}...</p>
+              )}
+
+              <h3>
+                <Link onClick={logout}>Logout</Link>
+              </h3>
+            </>
+          ) : (
+            <>
+              <h3>
+                <Link to={"/login"}>Login</Link>
+              </h3>
+              <h3>
+                <Link to={"/register"}>Register</Link>
+              </h3>
+            </>
+          )}
         </div>
 
         <div className="theme-toggle">

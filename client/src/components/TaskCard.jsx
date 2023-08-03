@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { useContext } from "react";
 import { tasksContext } from "../context/tasksContext";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
+import { authContext } from "../context/authContext";
 
 //  convert date according to user location
 const convertDate = (deadline) => {
@@ -23,6 +24,8 @@ const convertDate = (deadline) => {
 
 const TaskCard = ({ task }) => {
   const { _id, title, description, deadline, createdAt } = task;
+  const [user, setUser] = useContext(authContext);
+
   let FormattedDeadline = convertDate(deadline);
 
   if (FormattedDeadline?.substr(10, 4) === "1970") {
@@ -33,8 +36,17 @@ const TaskCard = ({ task }) => {
 
   const deleteHandler = async () => {
     try {
+      if (!user) {
+        throw Error("Please login");
+      }
+      
       const { data } = await axios.delete(
-        `${process.env.REACT_APP_API}/api/tasks/${_id}`
+        `${process.env.REACT_APP_API}/api/tasks/${_id}`,
+        {
+          headers: {
+            Authorization: user?.token,
+          },
+        }
       );
 
       if (data.success) {

@@ -3,6 +3,7 @@ import React from "react";
 import { useContext } from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { authContext } from "../context/authContext";
 import { tasksContext } from "../context/tasksContext";
 
 const TaskForm = () => {
@@ -10,6 +11,7 @@ const TaskForm = () => {
   const [description, setDescription] = useState("");
   const [deadlinestr, setDeadlinestr] = useState("");
   const [tasks, setTasks] = useContext(tasksContext);
+  const [user, setUser] = useContext(authContext);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -18,11 +20,15 @@ const TaskForm = () => {
       if (!title.length) {
         throw new Error("Please add task title!");
       }
+      if (!user) {
+        throw Error("Please login");
+      }
 
       const deadline = new Date(deadlinestr);
       const task = { title, description, deadline };
       const headers = {
         "Content-Type": "application/json",
+        Authorization: user?.token,
       };
 
       const { data } = await axios.post(

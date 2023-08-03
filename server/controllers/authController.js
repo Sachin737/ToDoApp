@@ -40,14 +40,15 @@ const loginController = async (req, res) => {
       });
     }
 
+    const name = user.name;
+
     // create token
     const token = await createToken(user._id);
 
     res.status(200).send({
       success: true,
       message: "Login successfully!",
-      user,
-      token,
+      user: { name, email, token },
     });
   } catch (err) {
     // //console.log(err);
@@ -66,19 +67,32 @@ const registerController = async (req, res) => {
 
     // VALIDATION
     if (!email || !password || !name) {
-      throw Error("Please fill all fileds!");
+      return res.status(400).send({
+        status: false,
+        message: "Please fill all fileds.",
+      });
     }
     if (!validator.isEmail(email)) {
-      throw Error("Please provide valid email address");
+      return res.status(400).send({
+        status: false,
+        message: "Please provide valid email address",
+      });
     }
-    if (!validator.isStrongPassword(password)) {
-      throw Error("Password is weak!");
-    }
+
+    // if (!validator.isStrongPassword(password)) {
+    //   return res.status(400).send({
+    //     status: false,
+    //     message: "Weak password",
+    //   });
+    // }
 
     //  Check if any user already exists with this email
     const exists = await userModel.findOne({ email });
     if (exists) {
-      throw Error("Email already registered!");
+      return res.status(400).send({
+        status: false,
+        message: "Email already registered!",
+      });
     }
 
     // hash of password using bcrypt
@@ -97,13 +111,13 @@ const registerController = async (req, res) => {
     // sending response
     res.status(201).send({
       success: true,
-      user,
-      token,
+      message: "Successfully registered",
+      user: { name, email, token },
     });
   } catch (err) {
     res.status(400).send({
       status: false,
-      message: err.message,
+      message: "Error in registration!",
     });
   }
 };

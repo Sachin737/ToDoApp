@@ -67,7 +67,15 @@ header .right .dropdown {
 
 header .right .links {
   display: flex;
+  align-items: center;
   gap: 32px;
+}
+
+
+header .username {
+  color: var(--logo);
+  border-right: 1px solid var(--logo);
+  padding: 1px 12px;
 }
 
 header .container {
@@ -204,6 +212,17 @@ form h3 {
 }
 
 
+/* ================================================ */
+/* Login SIgnup styling */
+form.register,
+form.login {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background: var(--bg);
+  border-radius: 4px;
+}
+
 
 
 /* ========================================== */
@@ -279,16 +298,18 @@ form h3 {
 #menuToggle input:checked~span {
   opacity: 1;
   transform: rotate(45deg) translate(-3px, -1px);
-  background: #36383F;
+  background: var(--bg);
 }
 
 #menuToggle input:checked~span:nth-last-child(3) {
   opacity: 0;
   transform: rotate(0deg) scale(0.2, 0.2);
+  color: var(--bg);
 }
 
 #menuToggle input:checked~span:nth-last-child(2) {
   transform: rotate(-45deg) translate(0, -1px);
+  color: var(--bg);
 }
 
 #menu {
@@ -304,6 +325,12 @@ form h3 {
   transform-origin: 0% 0%;
   transform: translate(-100%, 0);
   transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1.0);
+}
+
+#menuToggle .username1 {
+  color: var(--bg);
+  border-bottom: 1px solid var(--bg);
+  padding: 1px 12px;
 }
 
 #menuToggle input:checked~ul {

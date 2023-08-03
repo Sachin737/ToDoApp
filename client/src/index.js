@@ -3,28 +3,26 @@ import { Toaster } from "react-hot-toast";
 import ReactDOM from "react-dom/client";
 
 import "./index.css";
-import App from "./App";
+import App from "./App.js";
 
 import { BrowserRouter } from "react-router-dom";
-import { TasksProvider } from "./context/tasksContext";
-import { ThemeProvider } from "./context/themeContext";
-import { AuthProvider } from "./context/authContext";
+import { TasksProvider } from "./context/tasksContext.js";
+import { ThemeProvider } from "./context/themeContext.js";
+import { AuthProvider } from "./context/authContext.js";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <AuthProvider>
-        <ThemeProvider>
-          <Toaster position="top-center" />
-          <TasksProvider>
-            <App />
-          </TasksProvider>
-        </ThemeProvider>
-      </AuthProvider>
-    </BrowserRouter>
-  </React.StrictMode>
+  <BrowserRouter>
+    <AuthProvider>
+      <ThemeProvider>
+        <Toaster position="top-center" />
+        <TasksProvider>
+          <App />
+        </TasksProvider>
+      </ThemeProvider>
+    </AuthProvider>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function
