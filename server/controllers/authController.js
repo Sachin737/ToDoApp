@@ -10,9 +10,53 @@ const createToken = (_id) => {
 
 //  LOGIN CONTROLLER
 const loginController = async (req, res) => {
-  res.send({
-    msg: "logged in!",
-  });
+  try {
+    const { email, password } = req.body;
+
+    //validating user
+    if (!email || !password) {
+      return res.status(404).send({
+        success: false,
+        message: "Please fill all the fields",
+      });
+    }
+
+    // Check if user exist
+    const user = await userModel.findOne({ email });
+    if (!user) {
+      return res.status(404).send({
+        success: false,
+        message: "Email is not registered!",
+      });
+    }
+
+    // Match password with hashedPass in database
+    const hashedPassword = user.password;
+    const match = await comparePassword(password, hashedPassword);
+    if (!match) {
+      return res.status(200).send({
+        success: false,
+        message: "Invalid Password!",
+      });
+    }
+
+    // create token
+    const token = await createToken(user._id);
+
+    res.status(200).send({
+      success: true,
+      message: "Login successfully!",
+      user,
+      token,
+    });
+  } catch (err) {
+    // //console.log(err);
+    res.status(500).send({
+      success: false,
+      message: "Login failed!",
+      err,
+    });
+  }
 };
 
 // REGISTER CONTROLLER

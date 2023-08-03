@@ -23,23 +23,34 @@ const Header = () => {
           <h1>To Do App</h1>
         </Link>
       </div>
-      <div className="theme-toggle">
-        <h4>{theme}</h4>
-        <Switch
-          onChange={switchTheme}
-          checked={checked}
-          onColor="#86d3ff"
-          onHandleColor="#2693e6"
-          uncheckedIcon={false}
-          checkedIcon={false}
-          handleDiameter={12}
-          boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
-          activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
-          height={20}
-          width={42}
-          className="react-switch"
-          id="material-switch"
-        />
+      <div className="right">
+        <div className="links">
+          <h3>
+            <Link>login</Link>
+          </h3>
+          <h3>
+            <Link>register</Link>
+          </h3>
+        </div>
+
+        <div className="theme-toggle">
+          <h4>{theme}</h4>
+          <Switch
+            onChange={switchTheme}
+            checked={checked}
+            onColor="#86d3ff"
+            onHandleColor="#2693e6"
+            uncheckedIcon={false}
+            checkedIcon={false}
+            handleDiameter={12}
+            boxShadow="0px 1px 5px rgba(0, 0, 0, 0.6)"
+            activeBoxShadow="0px 0px 1px 10px rgba(0, 0, 0, 0.2)"
+            height={20}
+            width={42}
+            className="react-switch"
+            id="material-switch"
+          />
+        </div>
       </div>
     </header>
   );
