@@ -32,7 +32,7 @@ const ToggleMenu = () => {
           <Link to={"/login"}>Login</Link>
         </h3>
         <h3>
-          <Link to={"register"}>Register</Link>
+          <Link to={"/register"}>Register</Link>
         </h3>
 
         <h3>{theme}</h3>

@@ -26,10 +26,10 @@ const Header = () => {
       <div className="right">
         <div className="links">
           <h3>
-            <Link>login</Link>
+            <Link to={"/login"}>login</Link>
           </h3>
           <h3>
-            <Link>register</Link>
+            <Link to={"register"}>register</Link>
           </h3>
         </div>
 

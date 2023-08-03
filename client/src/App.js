@@ -6,20 +6,23 @@ import { useContext } from "react";
 import { themeContext } from "./context/themeContext";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import ToggleMenu from "./components/ToggleMenu";
 
 function App() {
   const [theme] = useContext(themeContext);
   return (
-    <div className="App" data-theme={theme}>
-      <Header />
-      <div className="pages">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
+    <>
+      <div className="App" data-theme={theme}>
+        <Header />
+        <div className="pages">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
